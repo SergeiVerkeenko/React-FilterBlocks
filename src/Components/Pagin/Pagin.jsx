@@ -1,7 +1,7 @@
-const Pagin = ({ contriesPerPage, total }) => {
+const Pagin = ({ informationPerPage, total, paginate }) => {
     const pageNumber = []
 
-    for (let i = 1; i <= Math.ceil(total / contriesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(total / informationPerPage); i++) {
         pageNumber.push(i)
 
     }
@@ -11,7 +11,7 @@ const Pagin = ({ contriesPerPage, total }) => {
                 {
                     pageNumber.map(number => (
                         <li className="page-item" key={number}>
-                            <a href="!#" className="page-link">
+                            <a href="!#" className="page-link" onClick={() => paginate(number)}>
                                 {number}
                             </a>
                         </li>

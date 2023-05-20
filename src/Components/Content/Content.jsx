@@ -5,32 +5,31 @@ import ItemContent from './Item.Content'
 import Pagin from '../Pagin/Pagin'
 
 function Content() {
-    const [contries, setContries] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [information, setContries] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-    const [contriesPerPage] = useState(5)
+    const [informationPerPage] = useState(4)
 
     useEffect(() => {
         const getCountries = () => {
-            setLoading(true)
             setContries(storage)
-            setLoading(false)
         }
 
         getCountries()
     }, [])
 
-    const lastIndex = currentPage * contriesPerPage
-    const firstIndex = lastIndex - contriesPerPage
-    const currentCountry = contries.slice(firstIndex, lastIndex)
+    const lastIndex = currentPage * informationPerPage
+    const firstIndex = lastIndex - informationPerPage
+    const currentInfo = information.slice(firstIndex, lastIndex)
 
+    const paginate = pageNumber => setCurrentPage(pageNumber)
     return (
 
         <>
-            {storage.map(el => <ItemContent id={el.id} vacancy={el.vacancy} workday={el.workday} city={el.city} salary={el.salary} />)}
+            {currentInfo.map(el => <ItemContent id={el.id} vacancy={el.vacancy} workday={el.workday} city={el.city} salary={el.salary} />)}
             <Pagin
-                contriesPerPage={contriesPerPage}
-                total={contries.length}
+                informationPerPage={informationPerPage}
+                total={information.length}
+                paginate={paginate}
             >
 
             </Pagin>
